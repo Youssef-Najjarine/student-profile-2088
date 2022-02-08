@@ -1,7 +1,18 @@
-.container {
+.students-container {
   font-family: "Balsamiq Sans", cursive;
   max-width: 900px;
   margin: 0 auto;
+}
+
+.search-student-by-name {
+  font-size: 30px;
+  color: black;
+  outline-style: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: solid #eee 1px;
+  padding: 3px 10px;
 }
 
 .students-row {
@@ -17,16 +28,16 @@
   width: 100%;
 }
 
-.column-center {
+.column-half {
   width: 50%;
 }
 
-.column-fifth {
-  width: 20%;
+.column-fourth {
+  width: 25%;
 }
 
-.column-third {
-  width: calc(100% / 3);
+.student-ul {
+  padding-left: 0;
 }
 
 .grades-ul {
