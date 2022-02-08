@@ -1,0 +1,38 @@
+.container {
+  font-family: "Balsamiq Sans", cursive;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.students-row {
+  display: flex;
+  align-items: center;
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+  border-width: thin;
+  padding: 10px 0;
+}
+
+.column-full {
+  width: 100%;
+}
+
+.column-center {
+  width: 50%;
+}
+
+.column-fifth {
+  width: 20%;
+}
+
+.column-third {
+  width: calc(100% / 3);
+}
+
+.grades-ul {
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}

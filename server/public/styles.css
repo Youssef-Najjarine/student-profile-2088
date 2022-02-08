@@ -1,0 +1,44 @@
+h1 {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+a,
+button {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.student-city {
+  font-size: 40px;
+  margin: 10px 0;
+}
+
+.student-ul li {
+  list-style: none;
+}
+
+.column-center ul {
+  padding-left: 10px;
+  color: gray;
+}
+
+.student-icons {
+  width: 100px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: lightgray;
+  border-width: thin;
+}
+
+.plus-minus-buttons {
+  float: right;
+  background: transparent;
+  color: lightgray;
+  border-color: white;
+  border-style: solid;
+}
+
+.plus-minus-icons {
+  font-size: 40px;
+}
