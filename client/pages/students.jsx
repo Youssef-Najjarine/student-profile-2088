@@ -4,16 +4,23 @@ export default class Students extends React.Component {
     super(props);
     this.state = {
       students: [],
-      searchByName: ''
-
+      searchByName: '',
+      searchByTag: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleTagsSubmit.bind(this);
   }
 
   componentDidMount() {
     fetch('https://api.hatchways.io/assessment/students')
       .then(response => response.json())
-      .then(data => this.setState({ students: data.students }));
+      .then(data => {
+        const students = data.students;
+        for (let i = 0; i < students.length; i++) {
+          students[i].tags = [];
+        }
+        this.setState({ students: students });
+      });
   }
 
   handleChange(event) {
@@ -22,19 +29,61 @@ export default class Students extends React.Component {
     this.setState({ [name]: value });
   }
 
+  handleTagsSubmit(event, fullName, studentId) {
+    event.preventDefault();
+    if (!this.state[fullName].trim()) {
+      return this.setState({ [fullName]: '' });
+    }
+    const students = this.state.students;
+    const currentId = studentId;
+    for (let i = 0; i < students.length; i++) {
+      if (students[i].id === currentId) {
+        students[i].tags.push(this.state[fullName]);
+      }
+    }
+    this.setState({ [fullName]: '' });
+  }
+
+  handleTagsDisplay(student) {
+    return student.tags.map((tag, index) => {
+      return <li key={index}>{tag}</li>;
+    });
+  }
+
   handleStudents() {
     const students = this.state.students;
-    const searchTerm = this.state.searchByName;
+    const searchName = this.state.searchByName;
+    const searchTag = this.state.searchByTag;
     if (students) {
-      return students.filter(student => {
-        if (searchTerm === '') {
+      const filteredStudents = students.filter(student => {
+        if (searchName === '' && searchTag === '') {
           return student;
-        } else if (student.firstName.toLowerCase().includes(searchTerm.toLowerCase()) || student.lastName.toLowerCase().includes(searchTerm.toLowerCase())) {
-          return student;
+        } else if (searchName !== '' && searchTag === '') {
+          if (student.firstName.toLowerCase().includes(searchName.toLowerCase()) || student.lastName.toLowerCase().includes(searchName.toLowerCase())) {
+            return student;
+          }
+        } else if (searchTag !== '' && searchName === '') {
+          for (let i = 0; i < student.tags.length; i++) {
+            if (student.tags[i].toLowerCase().includes(searchTag.toLowerCase())) {
+              return student;
+            }
+          }
+        } else if (searchName !== '' && searchTag !== '') {
+          if (student.firstName.toLowerCase().includes(searchName.toLowerCase()) || student.lastName.toLowerCase().includes(searchName.toLowerCase())) {
+            for (let i = 0; i < student.tags.length; i++) {
+              if (student.tags[i].toLowerCase().includes(searchTag.toLowerCase())) {
+                return student;
+              }
+            }
+          }
         }
         return false;
-      }).map(student => {
-        return <li key={student.id} className='students-row'>
+      });
+      if (filteredStudents.length === 0) {
+        return <h2 className='no-results-found'>No results found</h2>;
+      } else {
+        return filteredStudents.map(student => {
+          return <li key={student.id} className='students-row'>
           <div className='column-fourth'>
             <img className='student-icons' src={student.pic}/>
           </div>
@@ -46,24 +95,53 @@ export default class Students extends React.Component {
               <li><label>Skill:</label>{student.skill}</li>
               <li><label>Average: </label>{student.grades.reduce((acc, v, i, a) => (acc + v / a.length), 0)}%</li>
             </ul>
-            <ul className='grades-ul'>
+            <ul className='grades-ul hidden'>
               {student.grades.map((grade, index) => {
                 return <li key={index}>Test {index + 1}: {grade}%</li>;
               })}
             </ul>
+            <ul className='tags-display'>
+              {this.handleTagsDisplay(student)}
+            </ul>
+            <form onSubmit={event => this.handleTagsSubmit(event, student.firstName + student.lastName, student.id)}>
+              <input
+                required
+                onChange={this.handleChange}
+                placeholder='Add a Tag'
+                className='add-a-tag'
+                name={student.firstName + student.lastName}
+                type="text"
+                value={this.state[student.firstName + student.lastName] || ''}
+                />
+            </form>
           </div>
           <div className='column-fourth plus-minus-div'>
             <button className='plus-minus-buttons'><i className="fas fa-plus plus-minus-icons"></i></button>
           </div>
         </li>;
-      });
+        });
+      }
     }
   }
 
   render() {
+
     return (
       <>
-      <input className='search-student-by-name column-full' onChange={this.handleChange} name='searchByName' value={this.state.searchByName} placeholder='Search by name' type="text"/>
+      <input
+        className='search-student-by-name column-full'
+        onChange={this.handleChange} name='searchByName'
+        value={this.state.searchByName}
+        placeholder='Search by name'
+        type="text"
+        />
+        <input
+          className='search-tag column-full'
+          onChange={this.handleChange} name='searchByTag'
+          value={this.state.searchByTag}
+          placeholder='Search by tag'
+          type="text"
+        />
         <ul className='column-full student-ul'>
           {this.handleStudents()}
         </ul>

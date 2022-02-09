@@ -43,3 +43,19 @@ button {
 .plus-minus-icons {
   font-size: 40px;
 }
+
+.add-a-tag::placeholder {
+  font-size: 15px;
+}
+
+.add-a-tag {
+  font-size: 15px;
+  color: gray;
+}
+
+.tags-display li {
+  background-color: rgb(209, 209, 209);
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+}
