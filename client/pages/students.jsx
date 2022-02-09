@@ -5,8 +5,10 @@ export default class Students extends React.Component {
     this.state = {
       students: [],
       searchByName: '',
-      searchByTag: ''
+      searchByTag: '',
+      activeId: 0
     };
+    this.handleToggleDropDown = this.handleToggleDropDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleTagsSubmit.bind(this);
   }
@@ -48,6 +50,18 @@ export default class Students extends React.Component {
     return student.tags.map((tag, index) => {
       return <li key={index}>{tag}</li>;
     });
+  }
+
+  handleToggleDropDown(id) {
+    return this.state.activeId === id
+      ? this.setState({ activeId: 0 })
+      : this.setState({ activeId: id });
+  }
+
+  handleGradesDisplayed(id) {
+    return this.state.activeId === id
+      ? 'grades-ul'
+      : 'grades-ul hidden';
   }
 
   handleStudents() {
@@ -95,7 +109,7 @@ export default class Students extends React.Component {
               <li><label>Skill:</label>{student.skill}</li>
               <li><label>Average: </label>{student.grades.reduce((acc, v, i, a) => (acc + v / a.length), 0)}%</li>
             </ul>
-            <ul className='grades-ul hidden'>
+            <ul className={this.handleGradesDisplayed(student.id)}>
               {student.grades.map((grade, index) => {
                 return <li key={index}>Test {index + 1}: {grade}%</li>;
               })}
@@ -116,7 +130,11 @@ export default class Students extends React.Component {
             </form>
           </div>
           <div className='column-fourth plus-minus-div'>
-            <button className='plus-minus-buttons'><i className="fas fa-plus plus-minus-icons"></i></button>
+              <button
+                className='plus-minus-buttons'
+                onClick={() => this.handleToggleDropDown(student.id)}
+              ><i className={this.state.activeId === student.id ? 'fas fa-minus plus-minus-icons' : 'fas fa-plus plus-minus-icons'}></i>
+              </button>
           </div>
         </li>;
         });
