@@ -1,5 +1,5 @@
 
-# Submission Detials
+# Submission Details
 
 ```bash
 git clone https://github.com/Youssef-Najjarine/student-profile-2088.git
