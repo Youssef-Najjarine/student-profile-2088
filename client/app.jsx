@@ -21,15 +21,11 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <div className='students-container'>
-          <Header/>
+          <Header header='front-end assessment - student profiles'/>
           <main>
             {this.renderPage()}
           </main>
-        </div>
       </>
     );
   }
 }
-
-// http://localhost:3000/

@@ -1,12 +1,9 @@
 import React from 'react';
 
-export default class Header extends React.Component {
-  render() {
-    return (
-      <header>
-        <a href='#students'><h1>front-end assessment - student profiles</h1></a>
-
-      </header>
-    );
-  }
+export default function Header(props) {
+  return (
+    <header>
+      <a href='#students' className='students-header'><h1>{props.header}</h1></a>
+    </header>
+  );
 }
