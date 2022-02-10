@@ -1,5 +1,5 @@
 
-# Submission Details
+# Instructions for running FRONT-END ASSESSMENT - STUDENT PROFILES
 
 ```bash
 git clone https://github.com/Youssef-Najjarine/student-profile-2088.git
