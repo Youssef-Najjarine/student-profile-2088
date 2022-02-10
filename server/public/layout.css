@@ -1,5 +1,4 @@
 .students-container {
-  font-family: "Balsamiq Sans", cursive;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -72,4 +71,37 @@
 
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .students-header {
+    font-size: 8px;
+  }
+
+  .search-student-by-name,
+  .search-tag {
+    font-size: 15px;
+  }
+
+  .student-icons {
+    width: 60px;
+    margin-left: 15px;
+  }
+
+  .student-names {
+    font-size: 20px;
+  }
+
+  .students-row ul {
+    padding: 0;
+  }
+
+  .add-a-tag {
+    margin: 10px 0 0 20px;
+    width: 50%;
+  }
+
+  .tags-display {
+    width: 80%;
+  }
 }

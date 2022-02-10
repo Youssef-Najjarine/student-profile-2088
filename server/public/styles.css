@@ -1,4 +1,11 @@
+.students-container,
+.students-container input::placeholder,
+.students-container input,
 h1 {
+  font-family: "Balsamiq Sans", cursive;
+}
+
+.students-header {
   color: black;
   text-transform: uppercase;
   text-align: center;
@@ -10,7 +17,7 @@ button {
   cursor: pointer;
 }
 
-.student-city {
+.student-names {
   font-size: 40px;
   margin: 10px 0;
 }

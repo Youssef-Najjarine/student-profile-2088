@@ -102,7 +102,7 @@ export default class Students extends React.Component {
             <img className='student-icons' src={student.pic}/>
           </div>
           <div className='column-half'>
-            <h2 className='student-city'>{`${student.firstName} ${student.lastName}`}</h2>
+            <h2 className='student-names'>{`${student.firstName} ${student.lastName}`}</h2>
             <ul>
               <li><label>Email:</label>{student.email}</li>
               <li><label>Company:</label>{student.company}</li>
@@ -145,25 +145,25 @@ export default class Students extends React.Component {
   render() {
 
     return (
-      <>
-      <input
-        className='search-student-by-name column-full'
-        onChange={this.handleChange} name='searchByName'
-        value={this.state.searchByName}
-        placeholder='Search by name'
-        type="text"
-        />
+      <div className='students-container'>
         <input
-          className='search-tag column-full'
-          onChange={this.handleChange} name='searchByTag'
-          value={this.state.searchByTag}
-          placeholder='Search by tag'
+          className='search-student-by-name column-full'
+          onChange={this.handleChange} name='searchByName'
+          value={this.state.searchByName}
+          placeholder='Search by name'
           type="text"
-        />
-        <ul className='column-full student-ul'>
-          {this.handleStudents()}
-        </ul>
-      </>
+          />
+          <input
+            className='search-tag column-full'
+            onChange={this.handleChange} name='searchByTag'
+            value={this.state.searchByTag}
+            placeholder='Search by tag'
+            type="text"
+          />
+          <ul className='column-full student-ul'>
+            {this.handleStudents()}
+          </ul>
+      </div>
     );
   }
 }
