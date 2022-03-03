@@ -21,7 +21,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-          <Header header='front-end assessment - student profiles'/>
+          <Header header='student grades plug-in'/>
           <main>
             {this.renderPage()}
           </main>
